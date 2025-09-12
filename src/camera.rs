@@ -15,9 +15,8 @@ pub fn spawn_camera_spectator(
 }
 
 
-
 pub fn disable_imported_cameras(
-    mut q: Query<&mut Camera, (Added<Camera>, Without<Player>, Without<Spectator>)>,
+    mut q: Query<&mut Camera, (Added<Camera>, Without<Spectator>)>,
 ) {
     for mut cam in &mut q {
         cam.is_active = false;
