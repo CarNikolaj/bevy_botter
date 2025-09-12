@@ -26,7 +26,6 @@ use scene::{
 
 use light::{
     lighting,
-    spawn_sun
 };
 
 use diagnostics::{
@@ -77,7 +76,7 @@ fn main() {
     // Systems
     app.add_systems(
         Startup,
-        (setup, spawn_camera_spectator, lighting, performance, spawn_sun),
+        (setup, spawn_camera_spectator, lighting, performance),
     );
 
     app.add_systems(
