@@ -42,26 +42,26 @@ pub fn spectator_move(
     time: Res<Time>,
     
 ) {  
-    // 1) Eingaben sammeln
+    // input
     let mut d = Vec3::ZERO;
     if input.pressed(KeyCode::KeyA)        { d.x -= 1.0; }
     if input.pressed(KeyCode::KeyD)        { d.x += 1.0; }
-    if input.pressed(KeyCode::KeyW)        { d.z += 1.0; } // behalte dein Vorzeichen bei
+    if input.pressed(KeyCode::KeyW)        { d.z += 1.0; } 
     if input.pressed(KeyCode::KeyS)        { d.z -= 1.0; }
-    if input.pressed(KeyCode::Space)       { d.y += 1.0; } // hoch
-    if input.pressed(KeyCode::ShiftLeft)   { d.y -= 1.0; } // runter
+    if input.pressed(KeyCode::Space)       { d.y += 1.0; } 
+    if input.pressed(KeyCode::ShiftLeft)   { d.y -= 1.0; } 
 
-    // 2) Nur YAW aus der aktuellen Rotation extrahieren
+    // yaw
     let (yaw, _pitch, _roll) = spectator.rotation.to_euler(EulerRot::YXZ);
     let yaw_only = Quat::from_rotation_y(yaw);
 
-    // 3) Flache (XZ) Richtungsbasen aus NUR Yaw berechnen
-    // Bevy: -Z ist "vorwärts", +X ist "rechts"
+    // Flache (XZ) Richtungsbasen aus NUR Yaw berechnen
+    // -Z ist "vorwärts", +X ist "rechts"
     let forward_flat = yaw_only * -Vec3::Z;
     let right_flat   = yaw_only *  Vec3::X;
 
-    // 4) Horizontalbewegung (WASD) in der Horizontalen,
-    //    Vertikal separat addieren (weltbasiert)
+    // Horizontalbewegung (WASD) in der Horizontalen,
+    // Vertikal separat addieren 
     let horiz = forward_flat * d.z + right_flat * d.x;
     let vert  = Vec3::Y * d.y;
 

@@ -1,17 +1,24 @@
 use crate::spectator::Spectator;
 use bevy::prelude::*;
-
+use bevy::core_pipeline::Skybox;
 
 
 pub fn spawn_camera_spectator(
-    mut commands: Commands 
+    mut commands: Commands,
+    assets: Res<AssetServer>,
 ) {
     commands.spawn((
-            Camera3d::default(), 
-            Spectator,
-            Transform::from_xyz(-15.0, 10.0, 0.0).looking_at(Vec3::ZERO, Vec3::Y),
+        Camera3d::default(),
+        // optional, aber oft hübscher:
+        bevy::core_pipeline::tonemapping::Tonemapping::AcesFitted,
+        Spectator,
+        Transform::from_xyz(-15.0, 10.0, 0.0).looking_at(Vec3::ZERO, Vec3::Y),
+        Skybox {
+            image: assets.load("sky/skybox.ktx2"),
+            brightness: 1000.0,
+            ..Default::default()
+        },
     ));
-
 }
 
 

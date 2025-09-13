@@ -6,7 +6,7 @@ use bevy::gltf::GltfAssetLabel;
 pub fn setup(mut commands: Commands, assets: Res<AssetServer>) {
     // Load the first scene from the GLB
     let sponza_scene: Handle<Scene> =
-        assets.load(GltfAssetLabel::Scene(0).from_asset(""));
+        assets.load(GltfAssetLabel::Scene(0).from_asset("models/map.glb"));
 
     commands.spawn((
         SceneRoot(sponza_scene),

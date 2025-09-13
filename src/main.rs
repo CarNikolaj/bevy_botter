@@ -6,6 +6,7 @@ mod light;
 mod diagnostics;
 mod window_settings;
 
+
 //Own
 use spectator::{
     spectator_look, 
@@ -35,6 +36,7 @@ use diagnostics::{
 use window_settings::{
     configured_window_plugin
 };
+
 
 
 //Bevy
@@ -90,9 +92,9 @@ fn main() {
     );
 
     // z. B. HDR global ausschalten (oder nur bei deiner aktiven Kamera)
-    app.add_systems(Startup, |mut q: Query<&mut Camera, With<Camera3d>>| {
-        for mut cam in &mut q { cam.hdr = false; }
-    });
+    //app.add_systems(Startup, |mut q: Query<&mut Camera, With<Camera3d>>| {
+    //    for mut cam in &mut q { cam.hdr = false; }
+    //});
 
     app.add_systems(Update, disable_imported_cameras);
 
